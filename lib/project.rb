@@ -8,14 +8,36 @@ class Project
   end
 
   def sum_full_days
-    rate = city_type == :low_cost ? 75 : 85
-    days = (end_date - start_date).to_i - 1
-    days * rate
+    if same_day_trip?
+      0
+    else
+      rate = low_cost? ? 75 : 85
+      days = (end_date - start_date).to_i
+      days = days - 1 unless days == 0
+      days * rate
+    end
   end
 
   def sum_travel_days
-    rate = city_type == :low_cost ? 45 : 55
-    rate * 2
+    rate = low_cost? ? 45 : 55
+    if same_day_trip?
+      rate
+    else
+      rate * 2
+    end
   end
 
+  def high_cost?
+    self.city_type == :high_cost
+  end
+
+  def low_cost?
+    self.city_type == :low_cost
+  end
+
+  private
+
+  def same_day_trip?
+    end_date == start_date
+  end
 end
