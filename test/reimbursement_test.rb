@@ -46,11 +46,12 @@ class ReimbursementTest < Minitest::Test
     Project.new(:high_cost, Date.new(2015, 9, 8), Date.new(2015, 9, 8)) # 55
   ]
 
+  # Reimbursement for Set 4 should be $155
   SET_4 = [
-    Project.new(:low_cost, Date.new(2015, 9, 1), Date.new(2015, 9, 1)),
-    Project.new(:low_cost, Date.new(2015, 9, 1), Date.new(2015, 9, 1)),
-    Project.new(:high_cost, Date.new(2015, 9, 2), Date.new(2015, 9, 2)),
-    Project.new(:high_cost, Date.new(2015, 9, 2), Date.new(2015, 9, 3))
+    Project.new(:low_cost, Date.new(2015, 9, 1), Date.new(2015, 9, 1)), # 45
+    Project.new(:low_cost, Date.new(2015, 9, 1), Date.new(2015, 9, 1)), # 0 — because only one day should be reimbursed, even if there are multiple projects
+    Project.new(:high_cost, Date.new(2015, 9, 2), Date.new(2015, 9, 2)), # 0 - because only one day should be reimbursed
+    Project.new(:high_cost, Date.new(2015, 9, 2), Date.new(2015, 9, 3)) # 110 (since it shares a travel day with the previous project)
   ]
 
   def test_set_1
@@ -63,5 +64,9 @@ class ReimbursementTest < Minitest::Test
 
   def test_set_3
     assert_equal 415, Reimbursement.new(SET_3).amount
+  end
+
+  def test_set_4
+    assert_equal 155, Reimbursement.new(SET_4).amount
   end
 end

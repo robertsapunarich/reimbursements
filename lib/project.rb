@@ -34,9 +34,7 @@ class Project
   def low_cost?
     self.city_type == :low_cost
   end
-
-  private
-
+  
   def same_day_trip?
     end_date == start_date
   end
