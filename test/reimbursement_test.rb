@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require 'date'
 require_relative '../lib/reimbursement'
 
 # ---The Rules---
@@ -20,28 +21,31 @@ require_relative '../lib/reimbursement'
 class ReimbursementTest < Minitest::Test
 
 
-  set_1 = [
-    Project.new(:low_cost, Date.new(2015, 09, 01), Date.new(2015, 09, 03))
+  # Reimbursement for Set 1 should be $165
+  SET_1 = [
+    Project.new(:low_cost, Date.new(2015, 9, 01), Date.new(2015, 9, 03))
   ]
 
-  set_2 = [
-    Project.new(:low_cost, Date.new(2015, 09, 01), Date.new(2015, 09, 01)),
-    Project.new(:high_cost, Date.new(2015, 09, 02), Date.new(2015, 09, 06)),
-    Project.new(:low_cost, Date.new(2015, 09, 06), Date.new(2015, 09, 08))
+  SET_2 = [
+    Project.new(:low_cost, Date.new(2015, 9, 1), Date.new(2015, 9, 1)),
+    Project.new(:high_cost, Date.new(2015, 9, 2), Date.new(2015, 9, 6)),
+    Project.new(:low_cost, Date.new(2015, 9, 6), Date.new(2015, 9, 8))
   ]
 
-  set_3 = [
-    Project.new(:low_cost, Date.new(2015, 09, 01), Date.new(2015, 09, 03)),
-    Project.new(:high_cost, Date.new(2015, 09, 05), Date.new(2015, 09, 07)),
-    Project.new(:high_cost, Date.new(2015, 09, 08), Date.new(2015, 09, 08))
+  SET_3 = [
+    Project.new(:low_cost, Date.new(2015, 9, 1), Date.new(2015, 9, 3)),
+    Project.new(:high_cost, Date.new(2015, 9, 5), Date.new(2015, 9, 7)),
+    Project.new(:high_cost, Date.new(2015, 9, 8), Date.new(2015, 9, 8))
   ]
 
-  set_4 = [
-    Project.new(:low_cost, Date.new(2015, 09, 01), Date.new(2015, 09, 01)),
-    Project.new(:low_cost, Date.new(2015, 09, 01), Date.new(2015, 09, 01)),
-    Project.new(:high_cost, Date.new(2015, 09, 02), Date.new(2015, 09, 02)),
-    Project.new(:high_cost, Date.new(2015, 09, 02), Date.new(2015, 09, 03))
+  SET_4 = [
+    Project.new(:low_cost, Date.new(2015, 9, 1), Date.new(2015, 9, 1)),
+    Project.new(:low_cost, Date.new(2015, 9, 1), Date.new(2015, 9, 1)),
+    Project.new(:high_cost, Date.new(2015, 9, 2), Date.new(2015, 9, 2)),
+    Project.new(:high_cost, Date.new(2015, 9, 2), Date.new(2015, 9, 3))
   ]
 
-  
+  def test_set_1
+    assert_equal Reimbursement.new(SET_1).amount, 165
+  end
 end
