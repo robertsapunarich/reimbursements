@@ -21,7 +21,9 @@ class Reimbursement
       reimbursement += amt
       overlapping << projects.select{|proj| (proj.start_date == project.end_date || proj.end_date == project.start_date) && proj != project}
     end
-    
+
+    overlapping = overlapping.flatten.uniq 
+
     if overlapping.size > 0
       subtract_amount = handle_overlapping(overlapping)
       reimbursement - subtract_amount
