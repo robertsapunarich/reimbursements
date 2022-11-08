@@ -31,11 +31,24 @@ class ProjectDaySet < Array
 
     self.each_with_index do |day, i|
       unless day == self.first || day == self.last
-        if (self[i - 1].travel_day? && (day.date - self[i - 1].date).to_i == 1) || (day.travel_day? && (day.date - self[i - 1].date).to_i == 1)
+        prev = previous_day(i)
+        nxt = next_day(i)
+        if (prev.travel_day? && (day.date - prev.date).to_i == 1) || 
+          (nxt.travel_day? && (nxt.date - day.date).to_i == 1) ||
+          (day.travel_day? && (day.date - prev.date).to_i == 1 && (nxt.date - day.date).to_i == 1)
           day.workday_type = :full
         end
       end 
     end
-
   end
+
+  def next_day(ix)
+    self[ix + 1]
+  end
+
+  def previous_day(ix)
+    self[ix - 1]
+  end
+
+
 end
