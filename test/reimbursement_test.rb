@@ -50,10 +50,10 @@ class ReimbursementTest < Minitest::Test
     Project.new(:low_cost, Date.new(2015, 9, 6), Date.new(2015, 9, 8)) # 165 - 45 = 120 (since it shares a travel day with the previous project)
   ]
 
-  # Reimbursement for Set 3 should be $415
+  # Reimbursement for Set 3 should be $445
   SET_3 = [
     Project.new(:low_cost, Date.new(2015, 9, 1), Date.new(2015, 9, 3)), # 165
-    Project.new(:high_cost, Date.new(2015, 9, 5), Date.new(2015, 9, 7)), # 195
+    Project.new(:high_cost, Date.new(2015, 9, 5), Date.new(2015, 9, 7)), # 225
     Project.new(:high_cost, Date.new(2015, 9, 8), Date.new(2015, 9, 8)) # 55
   ]
 
@@ -74,7 +74,7 @@ class ReimbursementTest < Minitest::Test
   end
 
   def test_set_3
-    assert_equal 415, Reimbursement.new(SET_3).amount
+    assert_equal 445, Reimbursement.new(SET_3).amount
   end
 
   def test_set_4
