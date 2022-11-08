@@ -1,5 +1,7 @@
+require_relative 'project_day'
+
 class Project
-  attr_reader :city_type, :start_date, :end_date
+  attr_reader :city_type, :start_date, :end_date, :project_days
   
   def initialize(city_type, start_date, end_date)
     @city_type = city_type
@@ -7,35 +9,14 @@ class Project
     @end_date = end_date
   end
 
-  def sum_full_days
-    if same_day_trip?
-      0
-    else
-      rate = low_cost? ? 75 : 85
-      days = (end_date - start_date).to_i
-      days = days - 1 unless days == 0
-      days * rate
+  def create_days_for_project!
+    @project_days = []
+    (start_date..end_date).each do |date|
+      workday_type = date == start_date || date == end_date ? :travel : :full
+      @project_days << ProjectDay.new(date, city_type, workday_type)
     end
+
+    @project_days
   end
 
-  def sum_travel_days
-    rate = low_cost? ? 45 : 55
-    if same_day_trip?
-      rate
-    else
-      rate * 2
-    end
-  end
-
-  def high_cost?
-    self.city_type == :high_cost
-  end
-
-  def low_cost?
-    self.city_type == :low_cost
-  end
-  
-  def same_day_trip?
-    end_date == start_date
-  end
 end

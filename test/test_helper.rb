@@ -1,0 +1,6 @@
+require 'minitest/autorun'
+require 'date'
+require_relative '../lib/reimbursement'
+require_relative '../lib/project'
+require_relative '../lib/project_day'
+require_relative '../lib/project_day_set'
