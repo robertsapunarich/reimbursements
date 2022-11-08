@@ -1,7 +1,5 @@
-require 'minitest/autorun'
-require 'date'
-require_relative '../lib/project'
-require_relative '../lib/project_day'
+require_relative 'test_helper'
+
 
 class ProjectTest < Minitest::Test
 
@@ -15,5 +13,5 @@ class ProjectTest < Minitest::Test
     end
     assert project_days.select{|day| day.workday_type == :travel}.size == 2
   end
-  
+
 end

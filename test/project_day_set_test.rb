@@ -1,8 +1,4 @@
-require 'minitest/autorun'
-require 'date'
-require_relative '../lib/project'
-require_relative '../lib/project_day'
-require_relative '../lib/project_day_set'
+require_relative 'test_helper'
 
 class ProjectDaySetTest < Minitest::Test
   SET_1 = [

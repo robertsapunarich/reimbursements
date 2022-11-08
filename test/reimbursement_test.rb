@@ -1,7 +1,4 @@
-require 'minitest/autorun'
-require 'date'
-require_relative '../lib/reimbursement'
-
+require_relative 'test_helper'
 # ---The Rules---
 # First day and last day of a project, or sequence of projects, is a travel day.
 # - R.S. 11/6/22 What if a project starts and ends on the same day? Is it a travel day?
