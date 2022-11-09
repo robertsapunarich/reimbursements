@@ -12,8 +12,7 @@ class Reimbursement
 
   def calculate(projects)
     reimbursement = 0
-    overlapping = []
-
+    
     projects.each do |project|
       project.create_days_for_project!
     end
